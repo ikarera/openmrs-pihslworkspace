@@ -1,2 +1,2 @@
-# openmrs-pihslworkspace
+pih-slworkspace
 pih-sl work
