@@ -1,0 +1,82 @@
+{
+  "welcomeMessage": "KGH",
+  "providerIdentifierPrefix": "K",
+
+  "site": "KGH",
+
+  "locationTags": {
+    "Login Location": ["KGH Triage", "KGH MCH", "KGH Mental Health"],
+    "Program Location":  [ "KGH MCH", "KGH Mental Health"]
+  },
+
+  "components": [
+    "activeVisits",
+    "allergies",
+    "checkIn",
+    "clinicianDashboard",
+    "dataExports",
+    "dispensing",
+    "edTriage",
+    "edTriageQueue",
+    "idcardPrinting",
+    "labResults",
+    "labs",
+    "managePrinters",
+    "markPatientDead",
+    "mchGAINMaternal",
+    "mchGAINNewborn",
+    "mentalHealth",
+    "myAccount",
+    "overviewReports",
+    "patientDocuments",
+    "patientRegistration",
+    "primaryCare",
+    "programs",
+    "relationships",
+    "systemAdministration",
+    "visitManagement",
+    "visitNote",
+    "vitals",
+    "vitalsHomepageApp"
+  ],
+  "idCardLabel": "KGH",
+
+  "extraIdentifierTypes": [
+    "${patientIdentifierType.wellbodyEmrId.uuid}",
+    "${patientIdentifierType.ncdId.uuid}"
+  ],
+  "findPatientColumnConfig": [
+    {
+      "type": "identifier",
+      "value": "c09a1d24-7162-11eb-8aa6-0242ac110002",
+      "label": "ui.i18n.PatientIdentifierType.name.c09a1d24-7162-11eb-8aa6-0242ac110002",
+      "width": "80px"
+    },
+    {
+      "type": "name",
+      "label": "coreapps.search.name",
+      "width": "200px"
+    },
+    {
+      "type": "gender",
+      "label": "coreapps.gender",
+      "width": "65px"
+    },
+    {
+      "type": "age",
+      "label": "coreapps.age",
+      "width": "50px"
+    },
+    {
+      "type": "birthdate",
+      "label": "coreapps.birthdate",
+      "width": "100px"
+    },
+    {
+      "type": "identifier",
+      "value": "1a2acce0-7426-11e5-a837-0800200c9a66",
+      "label": "ui.i18n.PatientIdentifierType.name.1a2acce0-7426-11e5-a837-0800200c9a66",
+      "width": "80px"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "locationTags": {
+    "Login Location": ["KGH Triage", "KGH MCH", "KGH NCD", "KGH Mental Health" ],
+    "Program Location": [ "KGH MCH", "KGH NCD", "KGH Mental Health" ]
+  },
+
+  "components": [
+    "activeVisits",
+    "allergies",
+    "checkIn",
+    "clinicianDashboard",
+    "dataExports",
+    "dispensing",
+    "edTriage",
+    "edTriageQueue",
+    "idcardPrinting",
+    "labResults",
+    "labs",
+    "managePrinters",
+    "markPatientDead",
+    "mchGAINMaternal",
+    "mchGAINNewborn",
+    "mentalHealth",
+    "myAccount",
+    "ncd",
+    "overviewReports",
+    "patientDocuments",
+    "patientRegistration",
+    "primaryCare",
+    "programs",
+    "relationships",
+    "spaPreview",
+    "systemAdministration",
+    "visitManagement",
+    "visitNote",
+    "vitals",
+    "vitalsHomepageApp"
+  ]
+}

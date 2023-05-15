@@ -1,0 +1,168 @@
+{
+  "@openmrs/esm-api": {
+    "redirectAuthFailure": {
+      "url": "/pihcore/login.htm"
+    }
+  },
+  "@openmrs/esm-dispensing-app": {
+    "dispenseBehavior": {
+      "allowModifyingPrescription": false,
+      "restrictTotalQuantityDispensed": true
+    },
+    "locationBehavior": {
+      "locationColumn": {
+        "enabled": true
+      },
+      "locationFilter": {
+        "enabled": true,
+        "tag": "Login Location"
+      }
+    },
+    "valueSets": {
+      "reasonForPause": {
+        "uuid": "2dd3e5c0-3d3f-4f3d-9860-19b3f9ab26ff"
+      },
+      "reasonForClose": {
+        "uuid": "bd6c1fc2-7cfc-4562-94a0-e4765e5e977e"
+      },
+      "substitutionReason": {
+        "uuid": "de8671b8-ed2e-4f7e-a9f8-dcd00878f2eb"
+      },
+      "substitutionType": {
+        "uuid": "4c3a6b5c-9014-4d2a-8502-a74f4ae582f6"
+      }
+    }
+  },
+  "@openmrs/esm-login-app": {
+    "logo": {
+      "src": "/openmrs/spa/site/pih-logo.png",
+      "alt": "Partners in Health"
+    },
+    "links": {
+      "loginSuccess": "${openmrsBase}/pihcore/home.page"
+    }
+  },
+  "@openmrs/esm-fast-data-entry-app": {
+    "formCategories": [
+      {
+        "name": "Check-In",
+        "forms": [
+          {
+            "name": "Check-In",
+            "formUUID": "6058e2e0-7428-11e5-a837-0800200c9a66"
+          }
+        ]
+      }
+    ],
+    "formCategoriesToShow": [
+      "Check-In"
+    ]
+  },
+  "@openmrs/esm-outpatient-app": {
+    "concepts": {
+      "systolicBloodPressureUuid": "3ce934fa-26fe-102b-80cb-0017a47871b2",
+      "diastolicBloodPressureUuid": "3ce93694-26fe-102b-80cb-0017a47871b2",
+      "pulseUuid": "3ce93824-26fe-102b-80cb-0017a47871b2",
+      "temperatureUuid": "3ce939d2-26fe-102b-80cb-0017a47871b2",
+      "oxygenSaturationUuid": "3ce9401c-26fe-102b-80cb-0017a47871b2",
+      "heightUuid": "3ce93cf2-26fe-102b-80cb-0017a47871b2",
+      "weightUuid": "3ce93b62-26fe-102b-80cb-0017a47871b2",
+      "respiratoryRateUuid": "3ceb11f8-26fe-102b-80cb-0017a47871b2",
+      "generalPatientNoteUuid": "160531AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "midUpperArmCircumferenceUuid": "4326b04b-3158-417a-bb8d-ad022295b0f4",
+      "historicalObsConceptUuid": [ "3ce93cf2-26fe-102b-80cb-0017a47871b2", "3ce93b62-26fe-102b-80cb-0017a47871b2" ]
+    },
+    "contactAttributeType": ["14d4f066-15f5-102d-96e4-000c29c2a5d7"],
+    "vitals": {
+      "encounterTypeUuid": "4fb47712-34a6-40d2-8ed3-e153abbd25b7"
+    },
+    "showQueueTableTab": true,
+    "showRecommendedVisitTypeTab": false
+  },
+  "@openmrs/esm-patient-allergies-app": {
+    "concepts": {
+      "drugAllergenUuid": "4c886e88-04c1-11e5-8418-1697f925ec7b",
+      "environmentalAllergenUuid": "4c887806-04c1-11e5-8418-1697f925ec7b",
+      "foodAllergenUuid": "4c887216-04c1-11e5-8418-1697f925ec7b",
+      "mildReactionUuid": "3cdef9ae-26fe-102b-80cb-0017a47871b2",
+      "moderateReactionUuid": "3cdef832-26fe-102b-80cb-0017a47871b2",
+      "severeReactionUuid": "3cdefc92-26fe-102b-80cb-0017a47871b2",
+      "allergyReactionUuid": "4c8865b4-04c1-11e5-8418-1697f925ec7b",
+      "otherConceptUuid": "3cee7fb4-26fe-102b-80cb-0017a47871b2"
+    }
+  },
+
+  "@openmrs/esm-patient-banner": {
+    "contactAttributeType": ["14d4f066-15f5-102d-96e4-000c29c2a5d7"]
+  },
+  "@openmrs/esm-patient-biometrics-app": {
+    "concepts": {
+      "heightUuid": "3ce93cf2-26fe-102b-80cb-0017a47871b2",
+      "weightUuid": "3ce93b62-26fe-102b-80cb-0017a47871b2",
+      "muacUuid": "4326b04b-3158-417a-bb8d-ad022295b0f4"
+    },
+    "vitals": {
+      "encounterTypeUuid": "4fb47712-34a6-40d2-8ed3-e153abbd25b7"
+    }
+  },
+  "@openmrs/esm-patient-forms-app": {
+    "htmlFormEntryForms": [
+      {
+        "formUuid": "6058e2e0-7428-11e5-a837-0800200c9a66",
+        "formName": "Check-In",
+        "formUiResource": "file:configuration/pih/htmlforms/checkin.xml",
+        "formUiPage": "enterHtmlFormWithSimpleUi",
+        "_comment": "Sierra Leone specific"
+      }
+    ],
+    "showHtmlFormEntryForms": true
+  },
+  "@openmrs/esm-patient-medications-app": {
+    "daysDurationUnit": {
+      "uuid": "3cd706b8-26fe-102b-80cb-0017a47871b2"
+    },
+    "clinicianEncounterRole": "c458d78e-8374-4767-ad58-9f8fe276e01c",
+    "drugOrderEncounterType": "0b242b71-5b60-11eb-8f5a-0242ac110002",
+    "_comment": "TODO: drug order encounter type refers to Drug Order Documentation encounter; we likely will need another encounter type, or, better yet, none at all"
+  },
+  "@openmrs/esm-patient-notes-app": {
+    "visitNoteConfig": {
+      "clinicianEncounterRole": "c458d78e-8374-4767-ad58-9f8fe276e01c",
+      "encounterTypeUuid": "92fd09b4-5335-4f7e-9f63-b2a663fd09a6",
+      "encounterNoteTextConceptUuid": "3cd9d956-26fe-102b-80cb-0017a47871b2",
+      "visitDiagnosesConceptUuid": "159947AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "formConceptUuid": ""
+    }
+  },
+  "@openmrs/esm-patient-test-results-app": {
+    "concepts": [
+      {
+        "conceptUuid": "517d25f7-2e68-4da4-912b-76090fbfe0fd",
+        "defaultOpen": true
+      }
+    ]
+
+  },
+  "@openmrs/esm-patient-vitals-app": {
+    "concepts": {
+      "systolicBloodPressureUuid": "3ce934fa-26fe-102b-80cb-0017a47871b2",
+      "diastolicBloodPressureUuid": "3ce93694-26fe-102b-80cb-0017a47871b2",
+      "pulseUuid": "3ce93824-26fe-102b-80cb-0017a47871b2",
+      "temperatureUuid": "3ce939d2-26fe-102b-80cb-0017a47871b2",
+      "oxygenSaturationUuid": "3ce9401c-26fe-102b-80cb-0017a47871b2",
+      "heightUuid": "3ce93cf2-26fe-102b-80cb-0017a47871b2",
+      "weightUuid": "3ce93b62-26fe-102b-80cb-0017a47871b2",
+      "respiratoryRateUuid": "3ceb11f8-26fe-102b-80cb-0017a47871b2",
+      "generalPatientNoteUuid": "160531AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "midUpperArmCircumferenceUuid": "4326b04b-3158-417a-bb8d-ad022295b0f4"
+    },
+    "vitals": {
+      "encounterTypeUuid": "4fb47712-34a6-40d2-8ed3-e153abbd25b7"
+    }
+  },
+  "@openmrs/esm-styleguide": {
+    "Brand color #1": "#FF9800",
+    "Brand color #2": "#FFC166",
+    "Brand color #3": "#FFD699"
+  }
+}

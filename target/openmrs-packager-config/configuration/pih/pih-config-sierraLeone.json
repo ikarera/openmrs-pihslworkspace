@@ -1,0 +1,51 @@
+{
+  "browserWarning": "Please use the <b>Google Chrome</b> browser",
+
+  "country": "SIERRA_LEONE",
+  "site": "WELLBODY",
+
+  "authenticationConfig": {
+    "scheme": "2fa",
+    "schemes": {
+      "2fa": {
+        "config": {
+          "secondaryOptions": "secret,totp"
+        }
+      }
+    }
+  },
+
+  "scheduleBackupReports": "false",
+  "dashboardUrl": "/coreapps/clinicianfacing/patient.page?patientId={{patientId}}&app=pih.app.clinicianDashboard",
+  "visitsPageUrl": "/pihcore/visit/visit.page?patient={{patient.uuid}}#/visitList",
+  "visitsPageWithSpecificUrl": "/pihcore/visit/visit.page?patient={{patient.uuid}}&visit={{visit.uuid}}#/overview",
+
+  "dispositionConfig": "file:configuration/pih/pih-dispositions-sierraLeone.json",
+  "addressConfig": {
+    "manualFields": ["address2"],
+    "shortcutField": "stateProvince"
+  },
+
+  "registrationConfig": {
+    "allowUnknownPatients": false,
+    "allowManualEntryOfPrimaryIdentifier": false,
+    "afterCreatedUrl": "pihcore/patientRegistration/afterRegistration.page?patientId={{patientId}}&encounterId={{encounterId}}",
+    "similarPatientsSearch": {
+      "addressFields": {
+        "cityVillage": "1",
+        "address1": "1"
+      },
+      "personAttributeTypes" : {
+        "First Name of Mother": "3",
+        "Telephone Number": "20"
+      }
+    },
+    "demographics": {
+      "mothersName": {
+        "required": false
+      }
+    }
+  },
+
+  "idCardLocale": "en"
+}

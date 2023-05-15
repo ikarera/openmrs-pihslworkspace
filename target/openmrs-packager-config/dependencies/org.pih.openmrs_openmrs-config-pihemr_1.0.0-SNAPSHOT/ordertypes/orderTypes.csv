@@ -1,0 +1,5 @@
+Uuid,Void/Retire,Name,Description,Java class name,Parent
+131168f4-15f5-102d-96e4-000c29c2a5d7,,Drug Order,An order for a medication to be given to the patient,org.openmrs.DrugOrder,
+52a447d3-a64a-11e3-9aeb-50e549534c5e,,Test Order,Order type for test orders,org.openmrs.TestOrder,
+65c912c2-88cf-46c2-83ae-2b03b1f97d3a,,Pathology Test Order,A pathology test order,org.openmrs.TestOrder,52a447d3-a64a-11e3-9aeb-50e549534c5e
+5a3a8d2e-97c3-4797-a6a8-5417e6e699ec,,Radiology Test Order,A radiology test order,org.openmrs.module.radiologyapp.RadiologyOrder,52a447d3-a64a-11e3-9aeb-50e549534c5e

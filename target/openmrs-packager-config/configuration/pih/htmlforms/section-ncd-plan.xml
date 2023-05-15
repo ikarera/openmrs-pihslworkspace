@@ -1,0 +1,430 @@
+<htmlform id="ncd-plan-form" formUuid="aa8d9374-f343-4818-8433-66f4e6145a7f" formName="NCD Plan" formVersion="1.0">
+
+    <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.ApplyDispositionAction"/>
+
+    <style type="text/css">
+
+        form fieldset {
+            display: block;
+        }
+
+        .side-by-side label {
+        display: inline-block;
+        }
+
+        label {
+        padding: 0px 3px 0px 0px
+        }
+
+        form input[type="radio"], .form input[type="radio"] {
+            float: none;
+            display: inline-block;
+        }
+
+        .five-columns, .four-columns, .three-columns, .two-columns {
+            display: table;
+            height: 100%;
+            width: 100%;
+        }
+
+        .two-columns > div {
+            display: table-cell;
+            width: 50%;
+        }
+
+        .three-columns > div {
+            display: table-cell;
+            width: 33%;
+        }
+
+        p.radio > * {
+            display: inline;
+            float: none !important;
+            min-width: initial;
+        }
+
+        .section-container {
+            background: #F2F2F2;
+            box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
+            padding: 10px 5px 10px 15px;
+            line-height: 1.5em; /*add this for vertical spacing between elements*/
+        }
+
+        .section-container input[type="checkbox"] {
+            margin: 0px 5px; /*changed values to vertical, horizontal*/
+            top:5px; /*added to offset the checkbox position to line up*/
+        }
+
+        .section-container label { /*new definition to override labels inside section-containers*/
+            margin: 0px;
+        }
+
+       - .section {
+        width: 100%;
+        }
+
+        label {
+            padding: 0px 3px 0px 0px
+        }
+
+    </style>
+
+     <ifMode mode="VIEW" include="false">
+        <h1>
+            <uimessage code="pihcore.visitNote.plan"/>
+        </h1>
+    </ifMode>
+
+    <section id="drug-orders" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Treatment plan">
+        <div class="section-container">
+            <p>
+                <obs conceptId="CIEL:163104" style="textarea" rows="5" id="treatment-plan" />
+            </p>
+        </div>
+
+    </section>
+
+
+    <style type="text/css">
+
+        #test-orders {
+            padding-top padding-bottom: 0px;
+            line-height: 0.1;
+        }
+
+        #test-orders .orderwidget-orderable-section {
+            border-bottom: none;
+        }
+
+        #test-orders .orderwidget-existing-order-section {
+            display:none;
+        }
+
+        #test-orders .orderwidget-section-header {
+            padding-bottom: 25px;
+        }
+    </style>
+    <br/>
+
+    <section id="test-orders" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.lab.lab_tests.title">
+
+        <div class="section-container">
+            <order orderType="52a447d3-a64a-11e3-9aeb-50e549534c5e" format="select"
+                   selectLabel="pihcore.labOrder.addAnotherLab">
+                <orderTemplate>
+                    <orderProperty name="action" label="pihcore.action">
+                        <option value="NEW" label="pihcore.new"/>
+                    </orderProperty>
+
+                    <div style="padding:0px;font-weight:bold;">
+                        <orderProperty name="concept" label="" style="radio">
+                            <option value="3cd4e194-26fe-102b-80cb-0017a47871b2" label="Glucose" />
+                            <option value="3cd4374e-26fe-102b-80cb-0017a47871b2" label="Creatinine" />
+                            <option value="3cd76b58-26fe-102b-80cb-0017a47871b2" label="Na" />
+                            <option value="3cd76ce8-26fe-102b-80cb-0017a47871b2" label="K" />
+
+                            <option value="3ccc7158-26fe-102b-80cb-0017a47871b2" label="Hb" />
+                            <option value="3cd2a906-26fe-102b-80cb-0017a47871b2" label="Leukocytes" />
+                            <option value="3cd3d038-26fe-102b-80cb-0017a47871b2" label="Platelets" />
+                        </orderProperty>
+
+                        <div style="display:none;">
+                            <orderProperty name="urgency" value="ROUTINE"/>
+                            <orderProperty name="previousOrder"/>
+                            <orderProperty name="careSetting" value="OUTPATIENT"/>
+                        </div>
+                    </div>
+                </orderTemplate>
+            </order>
+        </div>
+    </section>
+
+    <section id="radiology-orders" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.rad_order.title">
+        <div class="section-container">
+            <div class="two-columns">
+                <div>
+                    <strong>X-ray</strong>
+                    <br/>
+
+                    <repeat with="['CIEL:1118','Not done'],
+                                  ['CIEL:1115','Normal'],
+                                  ['PIH:5158','Cardiomegaly'],
+                                  ['CIEL:139069','Heart failure'],
+                                  ['CIEL:141342','Emphysema'],
+                                  ['PIH:14586','Interstitial lung patterns'],
+                                  ['PIH:14582','Post TB changes'],
+                                  ['CIEL:5622','Other']">
+
+                        <obs conceptId="CIEL:12"
+                             answerConceptId="{0}"
+                             answerLabel="{1}"
+                             style="checkbox"/>
+                    </repeat>
+
+                    <label>if other, specify:</label>
+                    <obs conceptId="CIEL:1392" style="text"/>
+                </div>
+
+                <div>
+                    <strong>
+                        <uimessage code="Electrocardiogram (EKG) findings"/>
+                    </strong>
+                    <br/>
+
+                    <repeat with="['CIEL:1118','Not done'],
+                                  ['CIEL:1115','Normal'],
+                                  ['CIEL:135971','Left ventricular hypertrophy'],
+                                  ['CIEL:148203','Atrial Fibrillation'],
+                                  ['CIEL:135972','Dilated left ventricle'],
+                                  ['CIEL:168041','Depressed left ventricle'],
+                                  ['CIEL:5622','Other']">
+
+                        <obsgroup groupingConceptId="PIH:3403">
+                            <obs conceptId="CIEL:159565"
+                                 answerConceptId="{0}"
+                                 answerLabel="{1}"
+                                 style="checkbox"/>
+                        </obsgroup>
+                    </repeat>
+
+                    <label>if other, specify:</label>
+                    <obs conceptId="CIEL:160845" style="text"/>
+
+                    <!-- Echocardiogram -->
+                    <br/>
+                    <strong>
+                        <uimessage code="Echocardiogram findings"/>
+                    </strong>
+                    <br/>
+
+                    <repeat with="['CIEL:1118','Not done'],
+                              ['CIEL:1115','Normal'],
+                              ['PIH:COR PULMONALE','Cor pulmonale'],
+                              ['CIEL:5622','Other']">
+
+                        <obs conceptId="CIEL:159567"
+                             answerConceptId="{0}"
+                             answerLabel="{1}"
+                             style="checkbox"/>
+                    </repeat>
+
+                    <label>if other, specify:</label>
+                    <obs conceptId="CIEL:159573" style="text"/>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style type="text/css">
+
+        <!-- Hide the label for the drug field in view mode -->
+        .orderwidget-history-section .order-field-label.order-drug {
+            display:none;
+        }
+        <!-- Add a colon after the Dose label in view mode -->
+        .orderwidget-history-section .order-field-label.order-dose:after {
+            content: ": ";
+            white-space: pre;
+        }
+
+        .order-field {
+            display: inline-block;
+            padding: 0px;
+        }
+        .order-field.action {
+            display: block;
+        }
+        .order-field.dateActivated {
+            padding-right: 20px;
+        }
+        .order-field-label {
+            display: inline-block;
+            padding-right: 5px;
+            vertical-align: middle;
+        }
+        .order-field-label:after {
+            content: "";
+            white-space: pre;
+        }
+        .order-field-widget {
+            display: inline-block;
+        }
+
+    </style>
+
+    <!-- Use later for organizing meds by diagnosis
+    <section id="meds" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.ncd.meds">
+        <div class="section-container">
+            <p>
+
+                <label>
+                    <b>
+                        <uimessage code="pihcore.exam.cardiac_exam"/>
+                    </b>
+                </label>
+                <repeat with="['Acetylsalicylic acid, 100 mg tablet','tablet','8d5941e8-5f86-4289-a6ba-122320814bd5'],
+                              ['Amlodipine besylate, 5 mg tablet','tablet','6620289c-cc66-4892-9b2d-ecc40c746945'],
+                              ['Atenolol, 50 mg tablet','tablet','2f8d7a99-d4ec-4ad7-b898-1c953cb332fd'],
+                              ['Carvedilol, 12.5mg, tablet','tablet','d809f82b-7612-4da2-b075-531f586bdd7c'],
+                              ['Captopril, 25 mg tablet','tablet','7134a5ba-2033-4833-a1ac-d256fd005932'],
+                              ['Clopidogrel, 75mg, film coated tablet','tablet','8d7c8333-43f2-4e81-9923-14cdd790dcc3'],
+                              ['Enalapril maleate, 5 mg tablet','tablet','4efe3f48-2656-4178-bfcd-c6d103851084'],
+                              ['Furosemide, 40 mg tablet','tablet','fb5842a2-60ef-4539-b428-f99a1f76c85f'],
+                              ['Hydralazine hydrochloride, 25 mg, tablet','tablet','2ff6dfce-cd7e-4a1c-9916-f398c4aaec1f'],
+                              ['Hydrochlorothiazide, 25 mg tablet','tablet','ce857097-f7a1-4178-b018-a8067a5710d1'],
+                              ['Isosorbide dinitrate, 20 mg extended release tablet','tablet','95518896-df94-4e7d-b233-cc5af823975a'],
+                              ['Lisinopril, 5mg tablet','tablet','d0876723-9087-4ea5-b26d-d46cf914835f'],
+                              ['Lisinopril, 20mg tablet','tablet','4534a926-8dc4-440b-bdf9-f9e96d282a28'],
+                              ['Methyldopa, 250 mg film coated tablet','tablet','70123af9-a72a-4f6e-a188-140d905a84be'],
+                              ['Metoprolol succinate tartrate, 25 mg extended release tablet','tablet','819b83c0-e218-4ffe-854c-75c941feb948'],
+                              ['Nifedipine, 20 mg extended release tablet','tablet','d7937a60-a75b-42f6-9200-cd0e895606c0'],
+                              ['Propranolol hydrochloride, 40 mg, tablet','tablet','405dfa6c-ebaa-4a51-857f-b4df3788e7dd'],
+                              ['Simvastatin, 20mg tablet','tablet','01f14854-8305-4b12-8a52-3e01555fd66e'],
+                              ['Spironolactone, 25 mg tablet', 'tablet','82f3e5d8-0701-4948-a511-7d6f932dc9e6'],
+                              ['Warfarin, 5 mg tablet','tablet','1779f27f-0272-41da-a242-c6851a9aef6d']">
+                    <obsgroup groupingConceptId="PIH:Prescription construct">
+                        <obs conceptId="PIH:MEDICATION ORDERS" answerDrugId="{2}"
+                             answerCode="{0}" style="checkbox"/>
+                    </obsgroup>
+                </repeat>
+
+                <label>
+                    <b>
+                        <uimessage code="pihcore.endocrine"/>
+                    </b>
+                </label>
+                <repeat with="['Glibenclamide, 5 mg tablet','tablet','5c21704a-6268-4854-845d-55c573bed967'],
+                              ['Insuline rapide (regular)','IU','def06cd2-c046-4afc-9a49-475d3481cbcf'],
+                              ['Insuline lente (intermédiaire)','IU','568b5484-1f52-424a-a45d-3f1c9e0d92d6'],
+                              ['Insuline 70/30 mixte','IU','77077171-df0f-43c8-9a6b-245914fc143b'],
+                              ['Metformin hydrochloride, 500 mg tablet','tablet','afd2cd78-4dc6-4e91-ac9f-51b9e094e34a'],
+                              ['Prednisolone, 5 mg tablet','tablet','c63b13b6-210c-4575-ae5e-bbf86b5df747']">
+                    <obsgroup groupingConceptId="PIH:Prescription construct">
+                        <obs conceptId="PIH:MEDICATION ORDERS" answerDrugId="{2}"
+                             answerCode="{0}" style="checkbox"/>
+                    </obsgroup>
+                </repeat>
+            </p>
+
+        </div>
+    </section>
+    -->
+
+    <section id="drug-orders" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.visitNote.orders.medications">
+        <div class="section-container">
+            <drugOrder format="select" selectLabel="pihcore.drugOrder.addAnotherDrug">
+                <orderTemplate>
+                    <orderProperty name="action" label="pihcore.action">
+                        <option value="NEW" label="pihcore.new"/>
+                        <option value="REVISE" label="pihcore.revise"/>
+                        <option value="RENEW" label="pihcore.renew"/>
+                        <option value="DISCONTINUE" label="pihcore.discontinue"/>
+                    </orderProperty>
+
+                    <div style="padding:0px;font-weight:bold;">
+                        <orderProperty name="drug" label="pihcore.visitNote.plan.medication" style="autocomplete"/>
+                    </div>
+
+                    <div style="padding:0px;font-weight:bold;">
+                        <orderProperty name="dose" label="pihcore.visitNote.plan.dose"/>
+                        <orderProperty name="doseUnits" value="1513AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label=" "/>
+                        <orderProperty name="frequency" label=" "/>
+                        <orderProperty name="route" value="CIEL:160240" label=" ">
+                            <option value="CIEL:160240" /> <!-- Oral -->
+                            <option value="CIEL:162797" /> <!-- Topical -->
+                            <option value="CIEL:162392" /> <!-- Vaginally -->
+                        </orderProperty>
+                    </div>
+                    <div style="padding:0px;">
+                        <orderProperty name="dateActivated" label="pihcore.starting"/>
+                        <orderProperty name="duration" label="pihcore.visitNote.for"/>
+                        <orderProperty name="durationUnits" label=" "/>
+                    </div>
+                    <div style="padding:0px;">
+                        <orderProperty name="quantity" label="pihcore.quantity"/>
+                        <orderProperty name="quantityUnits" value="1513AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label=" "/>
+                        <orderProperty name="numRefills" value="0" label="pihcore.refills"/>
+                    </div>
+                    <div style="display:none;">
+                        <orderProperty name="urgency" value="ROUTINE"/>
+                        <orderProperty name="dosingType" value="org.openmrs.SimpleDosingInstructions"/>
+                        <orderProperty name="previousOrder"/>
+                        <orderProperty name="careSetting" value="OUTPATIENT"/>
+                    </div>
+                    <orderProperty name="discontinueReason" label="pihcore.discontinueReason">
+                        <option value="CIEL:843"/>
+                        <option value="CIEL:102"/>
+                        <option value="CIEL:127750"/>
+                        <option value="CIEL:1754"/>
+                        <option value="CIEL:162853"/>
+                        <option value="CIEL:1434"/>
+                        <option value="CIEL:987"/>
+                        <option value="CIEL:1253"/>
+                        <option value="CIEL:1067"/>
+                        <option value="CIEL:5622"/>
+                    </orderProperty>
+                </orderTemplate>
+            </drugOrder>
+        </div>
+        <div class="section-container">
+            <label><b><uimessage code="pihcore.remarks"/></b></label>
+            <p>
+                <obs conceptId="PIH:10637" cols="50" rows="5" />
+            </p>
+        </div>
+    </section>
+
+    <section id="disposition-section" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.consult.clinicalImpressions">
+        <div class="section-container">
+            <obs conceptId="CIEL:162749" style="textarea" rows="8"/>
+        </div>
+    </section>
+
+    <section id="disposition-section" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="coreapps.consult.disposition">
+        <div class="section-container">
+            <div class="two-columns">
+                <div>
+                    <label>
+                        <uimessage code="Next appointment date"/>
+                    </label>
+                    <obs conceptId="PIH:RETURN VISIT DATE" allowFutureDates="true" allowPastDates="false" id="apptDate" required="false"/>
+
+                    <label>
+                        <uimessage code="Next re-filling date"/>
+                    </label>
+                    <obs conceptId="CIEL:162549" allowFutureDates="true" id="refillDate"/>
+                </div>
+
+                <div>
+                    <div id="disposition">
+                        <encounterDisposition required="false"/>
+                    </div>
+
+                    <label>
+                        <uimessage code="pihcore.comment"/>
+                    </label>
+                    <obs conceptId="PIH:DISPOSITION COMMENTS" style="text"/>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <ifMode mode="VIEW" include="false">
+        <div id="buttons">
+            <submit submitClass="confirm right" submitCode="emr.save"/>
+            <button type="button" class="cancel">
+                <uimessage code="emr.cancel"/>
+            </button>
+        </div>
+    </ifMode>
+
+</htmlform>

@@ -1,0 +1,199 @@
+ {
+   "openmrs/esm-login-app": {
+     "chooseLocation": {
+       "enabled" : true,
+       "useLoginLocationTag": true,
+       "numberToShow": 5
+     },
+     "logo": {
+       "src": "site/logo.png",
+       "alt": "Partners In Health - Sierra Leone"
+     }
+
+   },
+  "@openmrs/esm-patient-registration-app": {
+    "sections": [
+      "demographics", "contact", "social", "identifiers"
+    ],
+    "sectionDefinitions": [
+      {
+        "id": "demographics",
+        "name": "Demographics",
+        "fields": [
+          "name", "gender", "dob", "mothers_name"
+        ]
+      },
+      {
+        "id": "contact",
+        "name": "Contact Info",
+        "fields": [
+          "address", "phone"
+        ]
+      },
+      {
+        "id": "social",
+        "name": "Social",
+        "fields": [
+          "occupation"
+        ]
+      },
+      {
+        "id": "identifiers",
+        "name": "Identifiers",
+        "fields": [
+          "id"
+        ]
+      }
+    ],
+    "fieldDefinitions": [
+      {
+        "id": "mothers_name",
+        "type": "person attribute",
+        "uuid": "8d871d18-c2cc-11de-8d13-0010c6dffd0f",
+        "label": "Mother's First Name"
+      },
+      {
+        "id": "phone",
+        "type": "person attribute",
+        "uuid": "14d4f066-15f5-102d-96e4-000c29c2a5d7",
+        "label": "Phone Number"
+      },
+      {
+        "id": "occupation",
+        "type": "obs",
+        "uuid": "3cd97286-26fe-102b-80cb-0017a47871b2",
+        "label": "Occupation",
+        "customConceptAnswers": [
+          {
+            "uuid": "162944AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "label": "Civil servant"
+          } ,
+          {
+            "uuid": "3cd9740c-26fe-102b-80cb-0017a47871b2",
+            "label": "Commerce"
+          },
+          {
+            "uuid": "cb9da4fc-cd1e-4d30-9000-1cefa26cd323",
+            "label": "Commercial bike rider"
+          },
+          {
+            "uuid":"f03e4898-ab3c-4fa5-8d7f-6cbfeee79c42",
+            "label": "Cowherd"
+          },
+          {
+            "uuid":"f15d07f0-be62-44d4-89ef-0e17e0aa480e",
+            "label": "Driver"
+          },
+          {
+            "uuid":"3cdcbe78-26fe-102b-80cb-0017a47871b2",
+            "label": "Factory worker"
+          },
+          {
+            "uuid":"3cd9757e-26fe-102b-80cb-0017a47871b2",
+            "label": "Farmer"
+          },
+          {
+            "uuid":"159674AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "label": "Fisherman"
+          },
+          {
+            "uuid":"3cdcbff4-26fe-102b-80cb-0017a47871b2",
+            "label": "Fruit or vegetable vendor"
+          },
+          {
+            "uuid":"3cdbc91e-26fe-102b-80cb-0017a47871b2",
+            "label": "Health care worker"
+          },
+          {
+            "uuid":"3cda14e8-26fe-102b-80cb-0017a47871b2",
+            "label": "Housework"
+          },
+          {
+            "uuid":"3ce40fca-26fe-102b-80cb-0017a47871b2",
+            "label": "Housework/Fieldwork"
+          },
+          {
+            "uuid":"3cd995ae-26fe-102b-80cb-0017a47871b2",
+            "label": "Manual Laborer"
+          },
+          {
+            "uuid":"162945AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "label": "Market Vendor"
+          },
+          {
+            "uuid":"a82a7a36-a7a4-4462-aa1c-b00d4e7ddb78",
+            "label": "Military"
+          },
+          {
+            "uuid":"3cdcbd06-26fe-102b-80cb-0017a47871b2",
+            "label": "Miner"
+          },
+          {
+            "uuid":"a1e44baf-c82f-4d4f-ac09-232da84c8a28",
+            "label": "Police"
+          },
+          {
+            "uuid":"907716b4-1852-404a-9ee1-beff998f9461",
+            "label": "Professional"
+          },
+          {
+            "uuid":"3ce4113c-26fe-102b-80cb-0017a47871b2",
+            "label": "Retired"
+          },
+          {
+            "uuid":"3cdcc468-26fe-102b-80cb-0017a47871b2",
+            "label": "Shop owner"
+          },
+          {
+            "uuid":"3cd976f0-26fe-102b-80cb-0017a47871b2",
+            "label": "Student"
+          },
+          {
+            "uuid":"d192f132-999a-4666-8725-028f9fcb8df4",
+            "label": "Teacher"
+          },
+          {
+            "uuid":"3cd979de-26fe-102b-80cb-0017a47871b2",
+            "label": "Unemployed"
+          },
+          {
+            "uuid":"3cee7fb4-26fe-102b-80cb-0017a47871b2",
+            "label": "Other"
+          }
+        ]
+      }
+    ],
+    "fieldConfigurations": {
+      "name": {
+        "displayMiddleName": true,
+        "unidentifiedPatient": false
+      },
+      "address": {
+        "useAddressHierarchy": {
+          "enabled": true,
+          "useQuickSearch": true,
+          "searchAddressByLevel": true
+        }
+      }
+    },
+    "registrationObs": {
+      "encounterTypeUuid": "873f968a-73a8-4f9c-ac78-9f4778b751b6",
+      "encounterProviderRoleUuid": "cbfe0b9d-9923-404c-941b-f048adc8cdc0"
+    }
+  },
+  "@openmrs/esm-primary-navigation-app": {
+    "logo": {
+      "src": "site/logo.png",
+      "alt": "Partners In Health - Sierra Leone",
+      "name": "Partners In Health - Sierra Leone"
+    }
+  },
+   "@openmrs/esm-patient-search-app": {
+     "defaultIdentifierTypes": [
+       "1a2acce0-7426-11e5-a837-0800200c9a66",
+       "c09a1d24-7162-11eb-8aa6-0242ac110002",
+       "badec513-cfbb-11ed-8b1c-0242ac120002"
+     ]
+   }
+}
+

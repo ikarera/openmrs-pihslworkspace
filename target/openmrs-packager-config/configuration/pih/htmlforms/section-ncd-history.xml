@@ -1,0 +1,514 @@
+<htmlform formUuid="b0b5ed18-f477-45d5-87f9-ad3df76e9b5b" formName="NCD History" formVersion="1.0">
+
+    <style type="text/css">
+
+        form fieldset {
+            display: block;
+        }
+
+        .family-history-item .label {
+            display: inline-block;
+            width: 250px;
+        }
+        .family-history-item .relative {
+            display: inline-block;
+            width: 120px;
+        }
+
+        .section-header {
+            margin-top: 1.5em;
+        }
+
+        .past-medical-history-item {
+        }
+
+        .past-medical-history-item input[type=checkbox] {
+            float: none;
+            vertical-align: middle;
+        }
+
+        .past-medical-history-item input[type=text] {
+            min-width: 200px;
+            display: inline !important;
+            vertical-align: middle;
+            padding: 1px 10px;
+        }
+
+        .past-medical-history-item > span, .past-medical-history-item > label {
+            display: inline !important;
+            vertical-align: middle;
+        }
+
+        .side-by-side label {
+            display: inline-block;
+        }
+
+        label {
+            padding: 0px 3px 0px 0px
+        }
+
+        form input[type="radio"], .form input[type="radio"] {
+            float: none;
+            display: inline-block;
+        }
+
+        #test-orders input[type=checkbox] {
+            float: none;
+            vertical-align: middle;
+        }
+
+        #test-orders p {
+            margin-bottom: 5px
+        }
+
+        #test-orders span, #test-orders label {
+            display: inline !important;
+            vertical-align: middle;
+        }
+
+        .five-columns, .four-columns, .three-columns, .two-columns {
+            display: table;
+            height: 100%;
+            width: 100%;
+        }
+
+        .two-columns > div {
+            display: table-cell;
+            width: 50%;
+        }
+
+        .three-columns > div {
+            display: table-cell;
+            width: 33%;
+        }
+
+        .two-columns-old {
+            column-count: 2;
+            -webkit-column-count: 2;
+            -moz-column-count: 2;
+        }
+
+        p.radio > * {
+            display: inline;
+            float: none !important;
+            min-width: initial;
+        }
+
+        .section-container {
+            background: #F2F2F2;
+            box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
+            padding: 10px 5px 10px 15px;
+            line-height: 1.5em; /*add this for vertical spacing between elements*/
+        }
+
+        .section-container-color {
+            background: #F2F2F2;
+            box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
+            padding: 10px 5px 10px 15px;
+            line-height: 1.5em; /*add this for vertical spacing between elements*/
+        }
+
+        .section-container input[type="checkbox"] {
+            margin: 0px 5px; /*changed values to vertical, horizontal*/
+            top:5px; /*added to offset the checkbox position to line up*/
+        }
+
+        .section-container label { /*new definition to override labels inside section-containers*/
+            margin: 0px;
+        }
+
+       - .section {
+            width: 100%;
+        }
+    </style>
+
+
+    <!-- special formatting when in view mode -->
+    <style type="text/css">
+        <ifMode mode="VIEW" include="false">
+            #family-history br {
+                display: none;
+            }
+        </ifMode>
+    </style>
+
+    <ifMode mode="VIEW" include="false">
+        <script type="text/javascript">
+                jq(function() {
+
+                    var validateFamHistoryText = function(divElem) {
+                        var parentDiv = divElem.closest('.medicalHistoryText');
+
+                        if (typeof parentDiv !== "undefined" ) {
+                            var fieldError = parentDiv.find('.field-error');
+                            var commentsInput= parentDiv.find('input[type=text]');
+                            if (typeof commentsInput !== "undefined" ) {
+                                var comments = commentsInput.val();
+                                if ((typeof comments !=="undefined") &amp;&amp; comments.length > 0 ) {
+                                    if ( parentDiv.find('input:checked').length &lt; 1 ) {
+                                        if (parentDiv.hasClass("famHistory")) {
+                                            fieldError.html("<uimessage code='pihcore.historyNote.family.indicateParent'/>").show();
+                                        } else if (parentDiv.hasClass("patientHistory")) {
+                                            fieldError.html("<uimessage code='pihcore.historyNote.pastMedicalHistory.checkWithoutComments'/>").show();
+                                        }
+
+                                        return false;
+                                    }
+                                } else {
+                                    // if there are no comments make sure the adjacent Parent checkbox is not checked
+                                    if ( parentDiv.find('input:checked').length &gt; 0 ) {
+                                        fieldError.html("<uimessage code='pihcore.historyNote.family.specifyComments'/>").show();
+                                        return false;
+                                    }
+                                }
+                            }
+                            fieldError.html(" ").hide();
+                        }
+                        return true;
+                    }
+
+
+                    jq('.medicalHistoryText').find('input[type=checkbox]').change(function() {
+                            validateFamHistoryText(jq(this));
+                     });
+
+                    jq('.medicalHistoryText').find('input[type=text]').change(function() {
+                        validateFamHistoryText(jq(this));
+                    });
+
+                    beforeSubmit.push(function() {
+                        var numErrors = 0;
+                        jq('.medicalHistoryText').find('input[type=text]').each(function() {
+                            if (!validateFamHistoryText(jq(this)) ) {
+                                ++numErrors;
+                            }
+                        });
+                        return ( numErrors == 0 );
+                    });
+
+                    // handlers for next and submit buttons, see nextAndSubmitButtons.js
+                    setUpNextAndSubmitButtons();
+
+            });
+        </script>
+    </ifMode>
+
+    <ifMode mode="VIEW" include="false">
+        <h1>
+            <uimessage code="NCD Patient Card"/>
+        </h1>
+    </ifMode>
+
+    <!-- ToDo: Removed this section
+    <section id="ncd-ids" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Identifiers">
+        <div class="section-container">
+            <div class="three-columns">
+                <div>
+                    <label>
+                        <uimessage code="NCD ID" />
+                    </label>
+                </div>
+
+                <div>
+                    <label>
+                        <uimessage code="Transfer ID" />
+                    </label>
+                </div>
+
+                <div>
+                    <label>
+                        <uimessage code="Facility ID#" />
+                    </label>
+                </div>
+            </div>
+        </div>
+    </section>
+    -->
+
+    <section id="details" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Patient Details">
+        <div class="section-container">
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="pihcore.type_of_visit" />
+                </label>
+                <obs conceptId="PIH:6189" style="radio"
+                     answerConceptIds="PIH:1246,PIH:12612,PIH:6192"
+                     answerCodes="Scheduled,Non scheduled,Urgent"/>
+            </p>
+
+            <div class="two-columns">
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="Care household"/>
+                        </label>
+                        <obs conceptId="PIH:10642" style="radio"
+                             answerConceptIds="CIEL:1065,CIEL:1066"/>
+                    </p>
+                </div>
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="Vulnerable"/>
+                        </label>
+                        <obs conceptId="CIEL:162956" style="radio"
+                             answerConceptIds="CIEL:1065,CIEL:1066,CIEL:160737"
+                             answerCodes="Yes,No,Not evaluated"/>
+                    </p>
+                </div>
+            </div>
+
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="Education level" />
+                </label>
+                <obs conceptId="CIEL:1712" style="radio"
+                     answerConceptIds="CIEL:1713,CIEL:1714,PIH:1701,CIEL:1107"
+                     answerCodes="Primary school,Secondary school,Tertiary school,No education"/>
+            </p>
+
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="Literacy level" />
+                </label>
+                <obs conceptId="CIEL:166855" style="radio"
+                     answerConceptIds="CIEL:1065,CIEL:1066"
+                     answerCodes="Able to read and write,Cannot read and write"/>
+            </p>
+
+            <div class="two-columns">
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="Social support" />
+                        </label>
+                        <obs id="social-support" conceptId="CIEL:163766" style="radio"
+                             answerConceptIds="CIEL:1065,CIEL:1066">
+                            <controls>
+                                <when value="CIEL:1065" thenDisplay="#specify-support"/>
+                            </controls>
+                        </obs>
+
+                        <div id="specify-support">
+                            <label>if yes, specify support:</label>
+                            <obs conceptId="PIH:2156" answerConceptId="PIH:990"   answerCode="Transport" />
+                            <obs conceptId="PIH:2156" answerConceptId="PIH:1400"  answerCode="Food" />
+                            <obs conceptId="PIH:2156" answerConceptId="PIH:2863"  answerCode="School" />
+                            <obs conceptId="PIH:2156" answerConceptId="CIEL:5622" answerCode="Other" commentFieldCode="specify other support"/>
+                        </div>
+                    </p>
+                </div>
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="Days of lost schooling (related diseases)" />
+                        </label>
+                        <obs conceptId="PIH:14446" />
+                    </p>
+                </div>
+            </div>
+
+            <p>
+                <label>
+                    <uimessage code="Referred from"/>
+                </label>
+
+                <div class="two-columns-old">
+                <repeat>
+                    <template>
+                            <obs conceptId="PIH:Type of referring service"
+                                 style="checkbox"
+                                 answerConceptId="{point}" answerCode="{message}"/>
+                    </template>
+
+                    <render point="PIH:2233"    message="OPD"                     comment="outpatient"/>
+                    <render point="PIH:12368"   message="PHU"                     comment="peripheral health unit"/>
+                    <render point="CIEL:160543" message="CBP"                     comment="Community-based program"/>
+                    <render point="CIEL:978"    message="Self-referred"           comment="self-refer"/>
+                    <render point="PIH:14445"   message="Screening program"       comment="Screening"/>
+                    <render point="CIEL:5485"   message="Inpatient ward"          comment="Pediatrics"/>
+                </repeat>
+                </div>
+
+                <obs conceptId="PIH:Type of referring service" style="checkbox"
+                     answerConceptId="PIH:OTHER" commentFieldLabel="" />
+            </p>
+        </div>
+    </section>
+
+    <section id="diagnosis" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Hospitalization">
+        <div class="section-container-color">
+            <obsgroup groupingConceptId="PIH:HOSPITALIZATION CONSTRUCT">
+                <div class="two-columns">
+                    <div>
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Hospitalization since last visit"/>
+                            </label>
+                            <obs id="hospital-stay" conceptId="CIEL:976" style="radio"
+                                 answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067">
+                                <controls>
+                                    <when value="CIEL:1065" thenDisplay="#num-hospital"/>
+                                </controls>
+                            </obs>
+                            <br/>
+
+                            <div id="num-hospital">
+                                <label>
+                                    <uimessage code="Number of hospitalizations since last visit"/>
+                                </label>
+                                <obs conceptId="CIEL:1773" />
+                                <br/>
+
+                                <label>
+                                    <uimessage code="Number of days"/>
+                                </label>
+                                <obs conceptId="PIH:2872" showUnits="true" />
+                            </div>
+                        </p>
+                    </div>
+
+                    <div>
+                        <label>
+                            <uimessage code="Findings during hospitalization"/>
+                        </label>
+                        <obs conceptId="PIH:6899" style="textarea" rows="3"/>
+
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Chronic lung disease screening tool during hospitalization" />
+                            </label>
+                            <br/>
+                            <obs conceptId="PIH:14602" style="radio"
+                                 answerConceptIds="CIEL:703,CIEL:664,CIEL:1118" />
+                        </p>
+                    </div>
+                </div>
+            </obsgroup>
+        </div>
+    </section>
+
+    <section id="risk-factors" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Risk Factors">
+        <div class="section-container-color two-columns">
+            <div>
+                <repeat>
+                    <template>
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="{questionName}"/>
+                            </label>
+                            <obs conceptId="{qId}" style="radio"
+                                 answerConceptIds="PIH:YES,PIH:NO"
+                                 answerCodes="yes,no" />
+                        </p>
+                    </template>
+                    <render qId="CIEL:159449" questionName="Alcohol" />
+                    <render qId="CIEL:163731" questionName="Smoking" />
+                    <render qId="CIEL:159365" questionName="Indoor cooking" />
+                    <render qId="PIH:14582"   questionName="History of pulmonary TB" />
+                    <render qId="CIEL:167822" questionName="Occupational exposure" />
+                    <render qId="PIH:14584"   questionName="Seasonal allergies" />
+                    <render qId="CIEL:167877" questionName="Excessive salt" />
+                    <render qId="CIEL:167878" questionName="Maggi / Seasoning" />
+                    <render qId="CIEL:167998" questionName="On ACE inhibitors" />
+                 </repeat>
+            </div>
+
+            <div>
+                <label>
+                    <uimessage code="Other risk factors"/>
+                </label>
+                <obs conceptId="PIH:12999" rows="4"/>
+            </div>
+        </div>
+    </section>
+
+    <section id="comorbitity" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.comorbidities.label">
+        <div class="section-container">
+            <p class="side-by-side">
+                <repeat>
+                    <template>
+                        <label>
+                            <uimessage code="{name}"/>
+                        </label>
+                        <obs conceptId="{comorbId}"
+                             answerConceptIds="{answIds}" style="radio"/>
+                        <br/>
+                    </template>
+                    <render comorbId="CIEL:1169" answIds="CIEL:703,CIEL:664,CIEL:1067" name="HIV" />
+                </repeat>
+            </p>
+
+            <p class="side-by-side">
+                <obs id="underlying-comorbidity" style="radio" conceptId="CIEL:166020"
+                     labelCode="pihcore.comorbidities.label"
+                     answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067">
+                    <controls>
+                        <when value="CIEL:1065" thenDisplay="#comorbitities" />
+                    </controls>
+                </obs>
+
+                <div id="comorbitities">
+                    <div class="two-columns-old">
+                        <repeat with="['Diabetes','CIEL:119481'],
+                                      ['Hypertension','CIEL:117399'],
+                                      ['Epilepsy','CIEL:155'],
+                                      ['Sickle cell','CIEL:117703'],
+                                      ['Rheumatic heart disease','CIEL:113227'],
+                                      ['HIV','CIEL:138405'],
+                                      ['Chronic kidney disease','CIEL:145438'],
+                                      ['Asthma','CIEL:121375'],
+                                      ['Chronic pulmonary disease','CIEL:1295'],
+                                      ['Active TB','CIEL:164500'],
+                                      ['Cardiomyopathy','CIEL:5016'],
+                                      ['Stroke','CIEL:111103'],
+                                      ['Obesity','CIEL:115115'],
+                                      ['Malnutrition','CIEL:115122'],
+                                      ['Psychosis','CIEL:113517'],
+                                      ['Substance abuse','CIEL:112603']">
+                            <obs conceptId="CIEL:162747" style="checkbox"
+                                 answerConceptId="{1}" answerCode="{0}"/>
+                        </repeat>
+                    </div>
+                    <obs conceptId="CIEL:162747" answerConceptId="CIEL:5622"
+                         commentFieldCode="zl.ifOtherSpecify" />
+                </div>
+            </p>
+
+        </div>
+    </section>
+
+    <section id="diagnosis" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Diagnosis">
+        <div class="section-container-color">
+
+            <div id="data-collection">
+                <encounterDiagnosesByObs selectedDiagnosesTarget="#encounter-diagnoses-target"/>
+            </div>
+        </div>
+    </section>
+
+    <section id="reason-for-visit" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Reason for visit">
+        <div class="section-container-color">
+            <label>
+                <uimessage code="Reason evaluated in the NCD clinic"/>
+            </label>
+            <obs conceptId="CIEL:164359" rows="4"/>
+        </div>
+    </section>
+
+    <ifMode mode="VIEW" include="false">
+        <div id="buttons">
+            <button id="next" type="button" class="submitButton confirm right"><uimessage code="emr.next"/><i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i></button>
+            <button id="submit" class="submitButton confirm right"><uimessage code="mirebalais.save"/><i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i></button>
+            <button id="cancel" type="button" class="cancel"><uimessage code="emr.cancel"/></button>
+        </div>
+    </ifMode>
+
+</htmlform>
